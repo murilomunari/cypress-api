@@ -22,29 +22,33 @@ describe('Alterar dispositivos', () => {
 
             const deviceId = postResponse.body.id;
 
-            const body = {
+            const updatedBody = {
                 "name": "Apple MacBook Pro 16",
                 "data": {
-                   "year": 2019,
-                   "price": 2049.99,
-                   "CPU model": "Intel Core i9",
-                   "Hard disk size": "1 TB",
-                   "color": "silver"
+                    "year": 2019,
+                    "price": 2049.99,
+                    "CPU model": "Intel Core i9",
+                    "Hard disk size": "1 TB",
+                    "color": "silver"
                 }
-             }
-
+            };
 
             cy.request({
                 method: "PUT",
                 url: `https://api.restful-api.dev/objects/${deviceId}`,
                 failOnStatusCode: false,
-                body: body
+                body: updatedBody
             }).then((putResponse) => {
                 expect(putResponse.status).to.equal(200);
 
-            })
-        });
+                // Exibe a resposta no console do navegador (F12)
+                console.log("Resposta do PUT:", putResponse.body);
 
+                // Exibe no painel do Cypress (como string JSON formatada)
+                cy.log("Resposta PUT:");
+                cy.log(JSON.stringify(putResponse.body, null, 2));
+            });
+        });
 
     });
 
