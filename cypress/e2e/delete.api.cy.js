@@ -34,7 +34,7 @@ describe('Deletar dispositivos', () => {
 
     it('deletar dispositivo que não existe', () => {
 
-        const id_inexistente = teste; 
+        const id_inexistente = 555; 
         
         cy.request({
             method: 'DELETE',

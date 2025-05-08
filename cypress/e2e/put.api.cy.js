@@ -1,22 +1,14 @@
 describe('Alterar dispositivos', () => {
 
-    it('Atualizar dispositivo especifico', () => {
+    const payload_device = require('../fixtures/device.json'); //.. e para voltar uma pasta
 
-        const body = {
-            "name": "Apple MacBook Pro 16",
-            "data": {
-                "year": 2019,
-                "price": 1849.99,
-                "CPU model": "Intel Core i9",
-                "Hard disk size": "1 TB"
-            }
-        }
+    it('Atualizar dispositivo especifico', () => {
 
         cy.request({
             method: 'POST',
             url: '/objects',
             failOnStatusCode: false,
-            body: body
+            body: payload_device
         }).then((postResponse) => {
             expect(postResponse.status).to.equal(200);
 
@@ -40,9 +32,6 @@ describe('Alterar dispositivos', () => {
                 body: updatedBody
             }).then((putResponse) => {
                 expect(putResponse.status).to.equal(200);
-
-                // Exibe a resposta no console do navegador (F12)
-                console.log("Resposta do PUT:", putResponse.body);
 
                 // Exibe no painel do Cypress (como string JSON formatada)
                 cy.log("Resposta PUT:");

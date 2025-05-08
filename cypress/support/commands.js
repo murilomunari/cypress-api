@@ -10,7 +10,15 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('buscarDevice', (deviceId) => { 
+    cy.request({ 
+        method: 'GET',
+        url: `/objects/${deviceId}`, 
+        failOnStatusCode: false,
+        }).then((response) => {
+            return response;
+        });
+    });
 //
 //
 // -- This is a child command --
