@@ -1,6 +1,6 @@
-describe('Deletar dispositivos', () => {
+describe('Alterar dispositivos', () => {
 
-    it('deletar dispositivo especifico', () => {
+    it('Atualizar dispositivo especifico', () => {
 
         const body = {
             "name": "Apple MacBook Pro 16",
@@ -10,7 +10,7 @@ describe('Deletar dispositivos', () => {
                 "CPU model": "Intel Core i9",
                 "Hard disk size": "1 TB"
             }
-        };
+        }
 
         cy.request({
             method: 'POST',
@@ -22,16 +22,29 @@ describe('Deletar dispositivos', () => {
 
             const deviceId = postResponse.body.id;
 
-            
+            const body = {
+                "name": "Apple MacBook Pro 16",
+                "data": {
+                   "year": 2019,
+                   "price": 2049.99,
+                   "CPU model": "Intel Core i9",
+                   "Hard disk size": "1 TB",
+                   "color": "silver"
+                }
+             }
+
+
             cy.request({
-                method: 'DELETE',
+                method: "PUT",
                 url: `https://api.restful-api.dev/objects/${deviceId}`,
                 failOnStatusCode: false,
-            }).then((deleteResponse) => {
-                expect(deleteResponse.status).to.equal(200);
-                expect(deleteResponse.body.message).to.equal(`Object with id = ${deviceId} has been deleted.`);
-            });
+                body: body
+            }).then((putResponse) => {
+                expect(putResponse.status).to.equal(200);
+
+            })
         });
+
 
     });
 
