@@ -6,7 +6,7 @@ describe('Buscar dispositivos', () => {
 
         cy.request({ 
             method: 'GET',
-            url: `https://api.restful-api.dev/objects/${deviceId}`, 
+            url: `/objects/${deviceId}`, 
             failOnStatusCode: false,
         }).as('getDeviceResult')
 
@@ -25,7 +25,7 @@ describe('Buscar dispositivos', () => {
 
 
             expect(response.body.data.price).not.string;
-            expect(response.body.data.year).to.equal(1849.99);
+            expect(response.body.data.price).to.equal(1849.99);
 
             expect(response.body.data['CPU model']).to.exist.and.to.not.be.empty;
         });

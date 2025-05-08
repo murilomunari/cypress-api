@@ -13,7 +13,7 @@ describe('Buscar dispositivos', () => {
 
         cy.request({
             method: 'POST',
-            url: 'https://api.restful-api.dev/objects',
+            url: '/objects',
             failOnStatusCode: false,
             body: requestBody
         }).then((response) => {
