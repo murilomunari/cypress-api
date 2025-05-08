@@ -1,7 +1,6 @@
 describe('Deletar dispositivos', () => {
 
     it('deletar dispositivo especifico', () => {
-
         const body = {
             "name": "Apple MacBook Pro 16",
             "data": {
@@ -22,7 +21,6 @@ describe('Deletar dispositivos', () => {
 
             const deviceId = postResponse.body.id;
 
-            
             cy.request({
                 method: 'DELETE',
                 url: `https://api.restful-api.dev/objects/${deviceId}`,
@@ -32,7 +30,20 @@ describe('Deletar dispositivos', () => {
                 expect(deleteResponse.body.message).to.equal(`Object with id = ${deviceId} has been deleted.`);
             });
         });
+    });
 
+    it.only('deletar dispositivo que não existe', () => {
+
+        const id_inexistente = 5555; 
+        
+        cy.request({
+            method: 'DELETE',
+            url: `https://api.restful-api.dev/objects/${id_inexistente}`,
+            failOnStatusCode: false,
+        }).then((deleteResponse) => {
+            expect(deleteResponse.status).to.equal(404);
+            expect(deleteResponse.body.error).to.equal(`Object with id = ${id_inexistente} doesn't exist.`);
+        });
     });
 
 });
